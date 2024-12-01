@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milo J en Chile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* Apilar elementos verticalmente */
+            height: 100vh;
+            background-color: black;
+            color: white;
+            font-family: "Bebas Neue", sans-serif;
+        }
+        video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        #imagen-superior {
+            position: absolute;
+            top: 20px; /* Separación desde el borde superior */
+            width: 150px; /* Ajusta el tamaño de la imagen */
+            z-index: 1; /* Asegúrate de que esté sobre el video */
+        }
+        #imagen-inferior {
+            position: absolute;
+            top: 85px; /* Ajusta esta distancia desde la parte superior */
+            width: 300px; /* Tamaño de la imagen */
+            z-index: 1; /* Sobre el video */
+        }
+        #contador {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            z-index: 1;
+        }
+        .tiempo {
+            text-align: center;
+        }
+        .tiempo .valor {
+            font-size: 150px;
+            font-weight: bold;
+        }
+        .tiempo .unidad {
+            font-size: 30px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Imagen superior -->
+    <img id="imagen-superior" src="logo-footer.png" alt="Logo o Imagen">
+    <img id="imagen-inferior" src="image.png" alt="Logo o Imagen">
+
+    <!-- Video de fondo -->
+    <video autoplay loop muted playsinline>
+        <source src="milo-j.mp4" type="video/mp4">
+        Tu navegador no soporta la reproducción de videos.
+    </video>
+
+    <!-- Contador -->
+    <div id="contador">
+        <div class="tiempo">
+            <div class="valor" id="dias">0</div>
+            <div class="unidad">DÍAS</div>
+        </div>
+        <div class="tiempo">
+            <div class="valor" id="horas">0</div>
+            <div class="unidad">HORAS</div>
+        </div>
+        <div class="tiempo">
+            <div class="valor" id="minutos">0</div>
+            <div class="unidad">MINUTOS</div>
+        </div>
+        <div class="tiempo">
+            <div class="valor" id="segundos">0</div>
+            <div class="unidad">SEGUNDOS</div>
+        </div>
+    </div>
+
+    <script>
+        function actualizarContador() {
+            var fechaObjetivo = new Date('2025-02-19T21:00:00-03:00');
+            var fechaActual = new Date();
+            var diferencia = fechaObjetivo - fechaActual;
+
+            var dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            var horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+            var segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+            document.getElementById('dias').innerHTML = dias;
+            document.getElementById('horas').innerHTML = horas;
+            document.getElementById('minutos').innerHTML = minutos;
+            document.getElementById('segundos').innerHTML = segundos;
+        }
+
+        setInterval(actualizarContador, 1000);
+    </script>
+</body>
+</html>
