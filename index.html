@@ -60,6 +60,18 @@
             font-size: 30px;
             margin-top: 5px;
         }
+        @media (max-width: 768px) {
+            #contador {
+                flex-direction: column; /* Cambiar la dirección del layout a vertical en pantallas pequeñas */
+                gap: 20px; /* Espacio entre los elementos */
+            }
+            .tiempo .valor {
+                font-size: 100px; /* Ajustar el tamaño de la fuente en pantallas pequeñas */
+            }
+            .tiempo .unidad {
+                font-size: 20px; /* Ajustar el tamaño de la unidad en pantallas pequeñas */
+            }
+        }
     </style>
 </head>
 <body>
