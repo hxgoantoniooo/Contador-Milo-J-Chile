@@ -60,16 +60,32 @@
             font-size: 30px;
             margin-top: 5px;
         }
-        @media (max-width: 768px) {
+
+        /* Pantallas pequeñas (orientación vertical) */
+        @media (max-width: 767px) and (orientation: portrait) {
             #contador {
-                flex-direction: column; /* Cambiar la dirección del layout a vertical en pantallas pequeñas */
-                gap: 20px; /* Espacio entre los elementos */
+                flex-direction: column; /* Cambiar la dirección del layout a vertical */
+                gap: 10px; /* Espacio entre los elementos */
             }
             .tiempo .valor {
-                font-size: 100px; /* Ajustar el tamaño de la fuente en pantallas pequeñas */
+                font-size: 60px; /* Ajustar el tamaño de la fuente en pantallas pequeñas */
             }
             .tiempo .unidad {
                 font-size: 20px; /* Ajustar el tamaño de la unidad en pantallas pequeñas */
+            }
+        }
+
+        /* Pantallas pequeñas (orientación horizontal) */
+        @media (max-width: 767px) and (orientation: landscape) {
+            #contador {
+                flex-direction: row; /* Cambiar la dirección del layout a horizontal */
+                gap: 20px; /* Espacio reducido entre los elementos */
+            }
+            .tiempo .valor {
+                font-size: 80px; /* Tamaño del texto más grande en horizontal */
+            }
+            .tiempo .unidad {
+                font-size: 25px; /* Tamaño ligeramente mayor */
             }
         }
     </style>
