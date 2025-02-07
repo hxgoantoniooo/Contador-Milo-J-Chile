@@ -11,18 +11,30 @@
         body {
             margin: 0;
             padding: 0;
-            overflow: hidden;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column; /* Apilar elementos verticalmente */
             height: 100vh;
             background-color: black;
             color: white;
             font-family: "Bebas Neue", sans-serif;
         }
-        video {
-            position: fixed;
+
+        .mitad {
+            width: 50%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .izquierda {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .izquierda video {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
@@ -30,115 +42,196 @@
             object-fit: cover;
             z-index: -1;
         }
+
+        .derecha {
+            background: url('cover_166.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
         #imagen-superior {
             position: absolute;
-            top: 20px; /* Separación desde el borde superior */
-            width: 150px; /* Ajusta el tamaño de la imagen */
-            z-index: 1; /* Asegúrate de que esté sobre el video */
+            top: 20px;
+            width: 150px;
+            z-index: 1;
         }
+
         #imagen-inferior {
             position: absolute;
-            top: 85px; /* Ajusta esta distancia desde la parte superior */
-            width: 300px; /* Tamaño de la imagen */
-            z-index: 1; /* Sobre el video */
+            top: 85px;
+            width: 300px;
+            z-index: 1;
         }
-        #contador {
+
+        #imagen-derecha-inferior {
+            position: absolute;
+            bottom: 20px;
+            width: 60%;
+            z-index: 1;
+        }
+
+        .contador {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 50px;
             z-index: 1;
         }
+
         .tiempo {
             text-align: center;
         }
+
         .tiempo .valor {
             font-size: 150px;
             font-weight: bold;
         }
+
         .tiempo .unidad {
             font-size: 30px;
             margin-top: 5px;
         }
 
-        /* Pantallas pequeñas (orientación vertical) */
-        @media (max-width: 767px) and (orientation: portrait) {
-            #contador {
-                flex-direction: column; /* Cambiar la dirección del layout a vertical */
-                gap: 10px; /* Espacio entre los elementos */
-            }
-            .tiempo .valor {
-                font-size: 60px; /* Ajustar el tamaño de la fuente en pantallas pequeñas */
-            }
-            .tiempo .unidad {
-                font-size: 20px; /* Ajustar el tamaño de la unidad en pantallas pequeñas */
-            }
+        .derecha .valor {
+            color: black;
+            text-shadow: -2px -2px 0 white,
+            2px -2px 0 white,
+            -2px 2px 0 white,
+            2px 2px 0 white;
         }
 
-        /* Pantallas pequeñas (orientación horizontal) */
-        @media (max-width: 767px) and (orientation: landscape) {
-            #contador {
-                flex-direction: row; /* Cambiar la dirección del layout a horizontal */
-                gap: 20px; /* Espacio reducido entre los elementos */
+        .derecha .unidad {
+            color: black;
+            text-shadow: -1px -1px 0 white,
+            1px -1px 0 white,
+            -1px 1px 0 white,
+            1px 1px 0 white;
+        }
+
+        @media (max-width: 1400px) {
+            body {
+                flex-direction: column; /* Cambia la dirección del flex a vertical */
             }
+            .mitad {
+                width: 100%; /* Ocupa todo el ancho */
+                height: 50vh; /* Ocupa la mitad de la altura */
+            }
+            .contador {
+                flex-direction: row; /* Contadores en fila */
+                flex-wrap: wrap; /* Permite que los contadores se ajusten a varias líneas */
+                justify-content: center; /* Centra los contadores horizontalmente */
+                gap: 10px; /* Espacio reducido entre contadores */
+            }
+            .izquierda video {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                z-index: -1;
+            }
+            #imagen-superior {
+                max-width: 25%; /* Ancho máximo para la imagen */
+                top: 5%;
+            }
+            #imagen-inferior {
+                max-width: 50%; /* Ancho máximo para la imagen */
+                top: 17%;
+            }
+            .derecha {
+                background-image: url('cover_166.jpg'); /* Usa background-image */
+                background-size: cover;
+                background-position: center;
+            }
+            .tiempo {
+                width: 45%; /* Ancho para cada contador (ajustar según se necesite) */
+                margin-bottom: 10px; /* Espacio inferior para separar líneas si hay varias */
+                text-align: center; /* Centrar texto dentro de cada contador */
+            }
+
             .tiempo .valor {
-                font-size: 80px; /* Tamaño del texto más grande en horizontal */
+                font-size: 40px; /* Tamaño de fuente reducido */
             }
+
             .tiempo .unidad {
-                font-size: 25px; /* Tamaño ligeramente mayor */
+                font-size: 14px; /* Tamaño de fuente reducido */
             }
         }
     </style>
 </head>
 <body>
-    <!-- Imagen superior -->
-    <img id="imagen-superior" src="logo-footer.png" alt="Logo o Imagen">
-    <img id="imagen-inferior" src="image.png" alt="Logo o Imagen">
-
-    <!-- Video de fondo -->
-    <video autoplay loop muted playsinline>
-        <source src="milo-j.mp4" type="video/mp4">
-        Tu navegador no soporta la reproducción de videos.
-    </video>
-
-    <!-- Contador -->
-    <div id="contador">
-        <div class="tiempo">
-            <div class="valor" id="dias">0</div>
-            <div class="unidad">DÍAS</div>
+    <div class="mitad izquierda">
+        <video autoplay loop muted playsinline>
+            <source src="milo-j.mp4" type="video/mp4">
+            Tu navegador no soporta la reproducción de videos.
+        </video>
+        <img id="imagen-superior" src="logo-footer.png" alt="Logo o Imagen">
+        <img id="imagen-inferior" src="image.png" alt="Logo o Imagen">
+        <div class="contador">
+            <div class="tiempo">
+                <div class="valor" id="dias1">0</div>
+                <div class="unidad">DÍAS</div>
+            </div>
+            <div class="tiempo">
+                <div class="valor" id="horas1">0</div>
+                <div class="unidad">HORAS</div>
+            </div>
+            <div class="tiempo">
+                <div class="valor" id="minutos1">0</div>
+                <div class="unidad">MINUTOS</div>
+            </div>
+            <div class="tiempo">
+                <div class="valor" id="segundos1">0</div>
+                <div class="unidad">SEGUNDOS</div>
+            </div>
         </div>
-        <div class="tiempo">
-            <div class="valor" id="horas">0</div>
-            <div class="unidad">HORAS</div>
-        </div>
-        <div class="tiempo">
-            <div class="valor" id="minutos">0</div>
-            <div class="unidad">MINUTOS</div>
-        </div>
-        <div class="tiempo">
-            <div class="valor" id="segundos">0</div>
-            <div class="unidad">SEGUNDOS</div>
+    </div>
+    <div class="mitad derecha">
+        <img id="imagen-derecha-inferior" src="retirada.png" alt="Imagen Derecha">
+        <div class="contador">
+            <div class="tiempo">
+                <div class="valor" id="dias2">0</div>
+                <div class="unidad">DÍAS</div>
+            </div>
+            <div class="tiempo">
+                <div class="valor" id="horas2">0</div>
+                <div class="unidad">HORAS</div>
+            </div>
+            <div class="tiempo">
+                <div class="valor" id="minutos2">0</div>
+                <div class="unidad">MINUTOS</div>
+            </div>
+            <div class="tiempo">
+                <div class="valor" id="segundos2">0</div>
+                <div class="unidad">SEGUNDOS</div>
+            </div>
         </div>
     </div>
 
     <script>
-        function actualizarContador() {
-            var fechaObjetivo = new Date('2025-02-19T21:00:00-03:00');
+        function actualizarContadores() {
+            var fecha1 = new Date('2025-02-19T21:00:00-03:00');
+            var fecha2 = new Date('2025-02-12T21:00:00-03:00');
             var fechaActual = new Date();
-            var diferencia = fechaObjetivo - fechaActual;
 
-            var dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-            var horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
-            var segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
-
-            document.getElementById('dias').innerHTML = dias;
-            document.getElementById('horas').innerHTML = horas;
-            document.getElementById('minutos').innerHTML = minutos;
-            document.getElementById('segundos').innerHTML = segundos;
+            function actualizarContador(idDias, idHoras, idMinutos, idSegundos, fechaObjetivo) {
+                var diferencia = fechaObjetivo - fechaActual;
+                var dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+                var horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+                var segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+                
+                document.getElementById(idDias).innerHTML = dias;
+                document.getElementById(idHoras).innerHTML = horas;
+                document.getElementById(idMinutos).innerHTML = minutos;
+                document.getElementById(idSegundos).innerHTML = segundos;
+            }
+            
+            actualizarContador('dias1', 'horas1', 'minutos1', 'segundos1', fecha1);
+            actualizarContador('dias2', 'horas2', 'minutos2', 'segundos2', fecha2);
         }
-
-        setInterval(actualizarContador, 1000);
+        
+        setInterval(actualizarContadores, 1000);
     </script>
 </body>
 </html>
