@@ -110,11 +110,9 @@
         @media (max-width: 1400px) {
             body {
                 flex-direction: column; /* Cambia la dirección del flex a vertical */
-                min-height: 10%;
             }
             .mitad {
                 width: 100%; /* Ocupa todo el ancho */
-                min-height: 45%; /* Ocupa la mitad de la altura */
             }
             .contador {
                 flex-direction: row; /* Contadores en fila */
@@ -138,6 +136,12 @@
             #imagen-inferior {
                 max-width: 50%; /* Ancho máximo para la imagen */
                 top: 17%;
+            }
+            #imagen-derecha-inferior {
+                position: absolute;
+                top: 0px;
+                width: 60%;
+                z-index: 1;
             }
             .derecha {
                 background-image: url('cover_166.jpg'); /* Usa background-image */
@@ -210,6 +214,19 @@
     </div>
 
     <script>
+        function ajustarAltura() {
+            const mitades = document.querySelectorAll('.mitad');
+
+            mitades.forEach(mitad => {
+                const contenido = mitad.querySelector('.contenido');
+                const alturaContenido = contenido.offsetHeight;
+
+                mitad.style.height = `${alturaContenido}px`;
+            });
+        }
+
+        window.addEventListener('resize', ajustarAltura);
+        window.addEventListener('load', ajustarAltura);
         function actualizarContadores() {
             var fecha1 = new Date('2025-02-19T21:00:00-03:00');
             var fecha2 = new Date('2025-02-12T21:00:00-03:00');
