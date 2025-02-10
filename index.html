@@ -82,12 +82,12 @@
         }
 
         .tiempo .valor {
-            font-size: 150px;
+            font-size: 10vw;
             font-weight: bold;
         }
 
         .tiempo .unidad {
-            font-size: 30px;
+            font-size: 2vw;
             margin-top: 5px;
         }
 
@@ -107,7 +107,7 @@
             1px 1px 0 white;
         }
 
-        @media (max-width: 1400px) {
+        @media (max-width: 1400px) and (orientation: portrait){
             body {
                 flex-direction: column; /* Cambia la dirección del flex a vertical */
             }
@@ -118,7 +118,7 @@
                 flex-direction: row; /* Contadores en fila */
                 flex-wrap: wrap; /* Permite que los contadores se ajusten a varias líneas */
                 justify-content: center; /* Centra los contadores horizontalmente */
-                gap: 10px; /* Espacio reducido entre contadores */
+                gap: 10%; /* Espacio reducido entre contadores */
             }
             .izquierda video {
                 position: absolute;
@@ -155,11 +155,11 @@
             }
 
             .tiempo .valor {
-                font-size: 40px; /* Tamaño de fuente reducido */
+                font-size: 10vw; /* Tamaño de fuente reducido */
             }
 
             .tiempo .unidad {
-                font-size: 14px; /* Tamaño de fuente reducido */
+                font-size: 3vw; /* Tamaño de fuente reducido */
             }
         }
     </style>
@@ -214,19 +214,6 @@
     </div>
 
     <script>
-        function ajustarAltura() {
-            const mitades = document.querySelectorAll('.mitad');
-
-            mitades.forEach(mitad => {
-                const contenido = mitad.querySelector('.contenido');
-                const alturaContenido = contenido.offsetHeight;
-
-                mitad.style.height = `${alturaContenido}px`;
-            });
-        }
-
-        window.addEventListener('resize', ajustarAltura);
-        window.addEventListener('load', ajustarAltura);
         function actualizarContadores() {
             var fecha1 = new Date('2025-02-19T21:00:00-03:00');
             var fecha2 = new Date('2025-02-12T21:00:00-03:00');
