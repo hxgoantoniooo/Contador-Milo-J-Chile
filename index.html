@@ -106,6 +106,15 @@
             -1px 1px 0 white,
             1px 1px 0 white;
         }
+        #mensaje {
+            font-size: 4vw;
+            color: black;
+            text-shadow: -1px -1px 0 white,
+            1px -1px 0 white,
+            -1px 1px 0 white,
+            1px 1px 0 white;
+            text-align: center;
+        }
 
         @media (max-width: 1400px) and (orientation: portrait){
             body {
@@ -128,6 +137,10 @@
                 height: 100%;
                 object-fit: cover;
                 z-index: -1;
+            }
+            #mensaje
+            {
+                font-size: 7vw;
             }
             #imagen-superior {
                 max-width: 25%; /* Ancho máximo para la imagen */
@@ -194,7 +207,7 @@
     </div>
     <div class="mitad derecha">
         <img id="imagen-derecha-inferior" src="retirada.png" alt="Imagen Derecha">
-        <div class="contador">
+        <div class="contador" id="contador2">
             <div class="tiempo">
                 <div class="valor" id="dias2">0</div>
                 <div class="unidad">DÍAS</div>
@@ -212,6 +225,9 @@
                 <div class="unidad">SEGUNDOS</div>
             </div>
         </div>
+        <div id="mensaje" style="display: none;">
+            ¡El deluxe de 166 ya esta afuera!
+        </div>
     </div>
 
     <script>
@@ -220,8 +236,12 @@
             var fecha2 = new Date('2025-02-12T21:00:00-03:00');
             var fechaActual = new Date();
 
-            function actualizarContador(idDias, idHoras, idMinutos, idSegundos, fechaObjetivo) {
+            function actualizarContador(idDias, idHoras, idMinutos, idSegundos, fechaObjetivo, contadorId, mensajeId) {
                 var diferencia = fechaObjetivo - fechaActual;
+                // Verificar si la diferencia es negativa, si es asi, mostrar 0 en el contador
+                if (diferencia < 0) {
+                    diferencia = 0;
+                }
                 var dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
                 var horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 var minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
@@ -231,10 +251,20 @@
                 document.getElementById(idHoras).innerHTML = horas;
                 document.getElementById(idMinutos).innerHTML = minutos;
                 document.getElementById(idSegundos).innerHTML = segundos;
+
+                // Cuando llega a cero
+                if (diferencia <= 0) {
+                    if (contadorId) { // Si se proporciona un ID de contador
+                        document.getElementById(contadorId).style.display = 'none';
+                    }
+                    if (mensajeId) { // Si se proporciona un ID de mensaje
+                        document.getElementById(mensajeId).style.display = 'block';
+                    }
+                }
             }
             
-            actualizarContador('dias1', 'horas1', 'minutos1', 'segundos1', fecha1);
-            actualizarContador('dias2', 'horas2', 'minutos2', 'segundos2', fecha2);
+            actualizarContador('dias1', 'horas1', 'minutos1', 'segundos1', fecha1, null, null);
+            actualizarContador('dias2', 'horas2', 'minutos2', 'segundos2', fecha2, 'contador2', 'mensaje');
         }
         
         setInterval(actualizarContadores, 1000);
